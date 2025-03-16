@@ -15,8 +15,7 @@ sub-layer in the decoder stack to prevent positions from attending to subsequent
 
 ## Positional Encoding :book:
 
-![Positional Encoding](assets/positional_img.jpg)  
-![Positional Encoding](assets/positional_encoding.jpg)  
+![Positional Encoding](assets/positional_img.jpg) ![Positional Encoding](assets/positional_encoding.jpg)  
 In order for the model to take advantage of the sequence's order, we have to inject some information about the relative or absolute positions in the sequence. To do this, we add "position encoding" to the input embeddings at the bottom of the encoder and decoder stack. Position encoding has the same dimensional dmodel as embedding, so the two can be added. There are many options for position encoding, learned and fixed. We use sine and cosine functions with different frequencies.
 
 ```bash
