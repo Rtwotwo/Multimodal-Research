@@ -1,12 +1,12 @@
 # :rocket: Multimodal Research Transformer
 
-<div, style="text-align: center;">
+<div style="text-align: center;">
 ![model architecture](assets/multimodal_research.jpg)
 </div>
 
 ## 1.Transformer Base :bulb:
 
-<div, style="text-align: center;">
+<div  style="text-align: center;">
 ![model architecture](assets/base/model_architecture.jpg)
 </div>
 
