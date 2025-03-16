@@ -1,8 +1,8 @@
-# :rocket:Transformer
+# :rocket: Transformer
 
 Transformer base code comes from the [Attention Is All You Need](https://arxiv.org/pdf/1706.03762v7) paper. It contains Postional Encoding, Multi-Head Attention, Feed Forward Network, Layer Normalization, Dropout, and Residual Connection modules. And the code is in the [models' folder](transformer/base/models) you can read.  
 
-## Model Architecture:bulb:
+## Model Architecture :bulb:
 
 The Transformer follows this overall architecture using stacked self-attention and point-wise, fully
 connected layers for both the encoder and decoder, shown in the left and right halves of Figure 1,
@@ -13,7 +13,7 @@ layers, produce outputs of dimension dmodel = 512.
 ___Decoder___: The decoder is also composed of a stack of N = 6 identical layers. In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer, which performs multi-head attention over the output of the encoder stack. Similar to the encoder, we employ residual connections around each of the sub-layers, followed by layer normalization. We also modify the self-attention
 sub-layer in the decoder stack to prevent positions from attending to subsequent positions. This masking, combined with fact that the output embeddings are offset by one position, ensures that the predictions for position i can depend only on the known outputs at positions less than i.  
 
-## Positional Encoding:book:
+## Positional Encoding :book:
 
 ![Positional Encoding](assets/positional_img.jpg)  
 ![Positional Encoding](assets/positional_encoding.jpg)  
