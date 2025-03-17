@@ -105,3 +105,75 @@ class FeedForward(nn.Module):
         x = self.linear2( self.dropout(x) )
         return x
 ```
+
+## Transformer :book:
+
+Save the index of the stuffed token and SOS token.Initialize the Encoder and Decoder.
+src_pad_idx: The index of the token populated in the source sequence (input)  
+trg_pad_idx: index of the stuffed token in the target sequence (output)  
+trg_sos_idx: Index of the Start Of Sentence (SOS) token in the target sequence  
+enc_voc_size: Encoder vocabulary size  
+dec_voc_size: Decoder vocabulary size  
+d_model: model dimension (word embedding dimension)  
+n_heads: the number of heads of the multi-head attention mechanism  
+max_len: Maximum sequence length  
+ffn_hidden: feedforward neural network hidden layer dimension  
+n_layers: The layers of the encoder and decoder  
+drop_prob: Dropout probability  
+Device: Computing device (such as CPU or GPU)  
+
+```bash
+class Transformer(nn.Module):
+    def __init__(self, src_pad_idx, trg_pad_idx, trg_sos_idx,
+                  enc_voc_size, dec_voc_size, d_model, n_heads,
+                max_len, ffn_hidden, n_layers, drop_prob, device):
+        super().__init__()
+        self.src_pad_idx = src_pad_idx
+        self.trg_pad_idx = trg_pad_idx
+        self.trg_sos_idx = trg_sos_idx
+        self.device = device
+        self.encoder = Encoder(enc_voc_size, d_model, n_heads, max_len, 
+                               ffn_hidden, n_layers, drop_prob, device)
+        self.decoder = Decoder(dec_voc_size, d_model, n_heads, max_len,
+                                ffn_hidden, n_layers, drop_prob, device)
+```
+
+1. Generate a mask (src_mask) of the source sequence.  
+2. Generate the mask (trg_mask) of the target sequence.  
+3. The source sequence is processed by the encoder to obtain the encoded representation (enc_src).  
+4. The decoder processes the target sequence and the encoded representation to obtain the final output (out).  
+The output of the decoder, of the shape (seq_len, batch_size, dec_voc_size).
+src: Source sequence (input) of the shape (seq_len, batch_size)  
+trg: Target sequence (output) of shape (seq_len, batch_size)  
+
+```bash
+    def forward(self, src, trg):
+        src_mask = self.make_src_mask(src)
+        trg_mask = self.make_trg_mask(trg)
+        enc_src = self.encoder(src, src_mask)
+        out = self.decoder(trg, enc_src, trg_mask, src_mask)
+        return out
+```
+
+Generates a mask of the source sequence to ignore padding tokens. Checks if each token in SRC is equal to src_pad_idx. Generate masks suitable for multi-head attention mechanisms by unsqueezing the dimensions.  
+
+```bash
+def make_src_mask(self, src):
+    src_mask = (src != self.src_pad_idx).unsqueeze(1).unsqueeze(2)
+    return src_mask
+```
+
+Generate a mask of the target sequence to ignore padding tokens and future tokens.  
+
+1. Generate a fill token mask (trg_pad_mask) of the shape (batch_size, 1, 1, seq_len)  
+2. Generate a lower triangle mask (trg_sub_mask) in the shape of (seq_len, seq_len) to mask future tokens.  
+3. Combine the two masks to generate the final target sequence mask.  
+
+```bash
+def make_trg_mask(self, trg):
+    trg_pad_mask = (trg != self.trg_pad_idx).unsqueeze(1).unsqueeze(3)
+    trg_len = trg.shape[1]
+    trg_sub_mask = torch.tril(torch.ones(trg_len, trg_len)).type(torch.ByteTensor).to(self.device)
+    trg_mask = trg_pad_mask & trg_sub_mask
+    return trg_mask
+```
