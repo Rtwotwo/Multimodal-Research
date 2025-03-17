@@ -52,7 +52,7 @@ class PositionalEncoding(nn.Module):
         return self.encoding[:seq_len, :]
 ```
 
-## Attention:book:
+## Attention :book:
 
 ![attention](assets/multi_attention.jpg)  
 The attention function can be described as mapping a query and a set of key-value pairs to an output, where the query, keys, values, and outputs are all vectors. The outputs are computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key.
@@ -84,7 +84,7 @@ class MultiHeadAttention(nn.Module):
 
 ## Feed Forward :book:
 
-![feed forward](assets/feed_forward.jpg)  
+![feed forward](assets/feed_forward_img.jpg)   ![feed forward](assets/feed_forward.jpg)  
 In addition to attention sub-layers, each of the layers in our encoder and decoder contains a fully connected feed-forward network, which is applied to each position separately and identically. This consists of two linear transformations with a ReLU activation in between.  
 
 ```bash
