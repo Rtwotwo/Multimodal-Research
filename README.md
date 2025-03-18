@@ -1,10 +1,10 @@
-# :rocket: Project Guide
-
 <div align="center">
     <img src="assets/multimodal_research.jpg" , alt="Project Logo">
 </div>
 
-The repo is mainly consists of transformer, mamba, rl, dinvo2, gpt, moe etc fundamental mode architecture code.  And under this repo, there are some other branchs for different projects, such as transformer, mamba, experts, rl, which consists of basic mode code and variant model architecture code. Also each of the branch has a README.md file to introduce the code with original paper you can read.
+# :rocket: Project Guide
+
+The Multimodal-Research repository is mainly composed of basic schema architecture code such as transformer, mamba, rl, DINO2, moe, etc. Under this repository, there are some other branches of different projects such as transformer, mamba, expert, rl, which consists of basic schema code and variant model architecture code. Each branch has a README.md file to introduce the code, you can read the original file.
 
 ```bash
 # the multimodal-research repo architecture
@@ -13,14 +13,20 @@ multimodal-research
         |_____main
         |
         |_____transformer
+        |     |
+        |     |_____base
+        |     |_____bert
         |
         |_____mamba
         |
         |_____rl
+        |     |
+        |     |_____DPO
+        |     |_____PPO
+        |     |_____DQN
+        |     |_____IPO
         |
         |_____dinvo2
-        |
-        |_____gpt
         |
         |_____moe
 ```
