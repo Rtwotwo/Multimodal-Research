@@ -1,8 +1,8 @@
 # :rocket: Multimodal Research Transformer
 
-<p align='center>
-<img src='assets/multimodal_research.jpg', alt='transformer logo'>
-</p>
+<div align='center>
+    <img src='assets/multimodal_research.jpg', alt='transformer logo'>
+</div>
 
 ## 1.Transformer Base :book:
 
