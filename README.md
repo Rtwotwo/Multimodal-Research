@@ -10,7 +10,7 @@
     <img src='assets/base/model_architecture.jpg', alt='transformer logo'>
 </div>
 
-Transformer base code comes from the [Attention Is All You Need] (https://arxiv.org/pdf/1706.03762v7) paper.  
+Transformer base code comes from the [Attention Is All You Need](https://arxiv.org/pdf/1706.03762v7) paper.  
 And the code is in the [models' folder](/base/models) you can read.  
 
 __Abstract__: The dominant sequence transduction models are based on complex recurrent or
