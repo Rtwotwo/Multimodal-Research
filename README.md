@@ -9,7 +9,9 @@
 <div align='center'>
     <img src='assets/base/model_architecture.jpg', alt='transformer logo'>
 </div>
-Transformer base code comes from the [Attention Is All You Need] (https://arxiv.org/pdf/1706.03762v7) paper.  And the code is in the [models' folder](/base/models) you can read.  
+
+Transformer base code comes from the [Attention Is All You Need] (https://arxiv.org/pdf/1706.03762v7) paper.  
+And the code is in the [models' folder](/base/models) you can read.  
 
 __Abstract__: The dominant sequence transduction models are based on complex recurrent or
 convolutional neural networks that include an encoder and a decoder. The best
@@ -32,6 +34,7 @@ large and limited training data.
 <div align='center'>
     <img src='assets/bert/bert.jpg', alt='Bert logo'>
 </div>
+
 Bert base code comes from the [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805v1.pdf) paper. And the code is in the [models' folder](/bert/models) you can read.
 
 __Abstract__: Fine-tuning large pre-trained models is an effective transfer mechanism in NLP. However, in the
