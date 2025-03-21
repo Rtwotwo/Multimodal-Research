@@ -25,7 +25,7 @@ class PositionalEncoding(nn.Module):
         
         # 'i' means index of d_model (e.g. embedding size = 50, 'i' = [0,50])
         # "step=2" means 'i' multiplied with two (same with 2 * i)
-        _2i = torch.arrange(0, d_model, step=2, device=device)
+        _2i = torch.arange(0, d_model, step=2, device=device)
 
         self.encoding[:, 0::2] = torch.sin(pos / (10000 ** (_2i / d_model)))
         self.encoding[:, 1::2] = torch.cos(pos / (10000 ** (_2i / d_model)))

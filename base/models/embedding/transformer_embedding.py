@@ -9,7 +9,7 @@ from models.embedding.positional_encoding import PositionalEncoding
 from models.embedding.token_embedding import TokenEmbedding
 
 
-class TransformerEmbedding(nn.Mudule):
+class TransformerEmbedding(nn.Module):
     """compute transformer embedding with token embedding 
     and positional encoding(sinusoid)"""
     def __init__(self, vocab_size, d_model, max_len, drop_prob, device):

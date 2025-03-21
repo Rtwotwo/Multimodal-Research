@@ -26,5 +26,4 @@ class Encoder(nn.Module):
 
         for layer in self.layers:
             x = layer(x, src_mask)
-        
         return x
