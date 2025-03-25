@@ -29,11 +29,12 @@ def config():
     return args
 
 
+
 if __name__ == '__main__':
     args = config()
     transformer = Transformer(args.src_pad_idx, args.trg_pad_idx,
-                            args.trg_sos_idx, args.enc_voc_size, 
-                            args.dec_voc_size, args.d_model, args.n_heads,
-                            args.max_len, args.ffn_hidden, args.n_layers,
-                            args.drop_prob, args.device).to(args.device)
+                    args.trg_sos_idx, args.enc_voc_size, 
+                    args.dec_voc_size, args.d_model, args.n_heads,
+                    args.max_len, args.ffn_hidden, args.n_layers,
+                    args.drop_prob, args.device).to(args.device)
     print(transformer)
