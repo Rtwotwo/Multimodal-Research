@@ -21,4 +21,40 @@ def gelu(x):
 
 def swish(x):
     return x * torch.sigmoid(x)
+activations = {'gelu': gelu, 'relu':F.relu, 'swish':swish}
 
+
+class LayerNorm(nn.Module):
+    """Layernorm layer, implemented here, the purpose is to be compatible with conditianal layernorm, 
+        making it possible to do tasks such as conditional text generation and conditional classification
+        Conditional layernorm comes from Su Jianlin's idea, details: https://spaces.ac.cn/archives/7124"""
+    def __init__(self, hidden_size, eps=1e-12, conditional=False):
+        super(LayerNorm, self).__init__()
+        self.weight = nn.Parameter(torch.ones(hidden_size))
+        self.bias = nn.Parameter(torch.zeros(hidden_size))
+        self.eps = eps
+        self.conditional = conditional
+        if self.conditional:
+            #Conditional layernorm, for conditional text generation,
+            #All-zero initialization is used here to avoid interfering
+            #with the original pre-trained weights in the initial state
+            self.dense1 = nn.Linear(2*hidden_size, hidden_size, bias=False)
+            self.dense1.weight.data.uniform_(0, 0)
+            self.dense2 = nn.Linear(2*hidden_size, hidden_size, bias=False)
+            self.dense2.weight.data.uniform_(0, 0)
+    
+    def forward(self, x):
+        if self.conditional:
+            inputs = x[0]
+            cond = x[1]
+            for _ in range(len(inputs.shape)) - len(cond.shape):
+                cond = cond.unsqueeze(dim=1)
+            u = inputs.mean(-1, keepdim=True)
+            s = (inputs - u).pow(2).mean(-1, keepdim=True)
+            x = (inputs - u) / torch.sqrt(s + self.eps)
+            return (self.weight + self.dense1(cond))*x + (self.bias + self.dense2(cond))
+        else:
+            u = x.mean(-1, keepdim=True)
+            s = (x - u).pow(2).mean(-1, keepdim=True)
+            x = (x - u) / torch.sqrt(s + self.eps)
+            return self.weight * x + self.bias
