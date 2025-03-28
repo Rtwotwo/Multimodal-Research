@@ -138,3 +138,4 @@ class PositionWiseFeedForward(nn.Module):
     def __init__(self, hidden_size, intermediate_size, 
                  dropout_rate=0.5, is_dropout=True):
         super(PositionWiseFeedForward, self).__init__()
+        
